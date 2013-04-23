@@ -8,6 +8,7 @@
 
 #import "AirTestAppDelegate.h"
 #import "AMHTTPConnection.h"
+#import "AMCIHTTPConnection.h"
 #import "AMDataHelper.h"
 #import "DDTTYLogger.h"
 
@@ -34,6 +35,18 @@
 	{
 		DDLogError(@"Error starting HTTP Server: %@", error);
 	}
+    
+    // CI Support
+    ciHTTPServer = [[HTTPServer alloc] init];
+    [ciHTTPServer setConnectionClass:[AMCIHTTPConnection class]];
+    [ciHTTPServer setPort:2222];
+    success = [ciHTTPServer start:&error];
+	
+	if(!success)
+	{
+		DDLogError(@"Error starting HTTP Server: %@", error);
+	}
+    // CI Support End
     
 //    NSString *root = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) objectAtIndex:0];
 //    NSString *root = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) objectAtIndex:0];

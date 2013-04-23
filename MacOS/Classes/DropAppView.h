@@ -21,5 +21,6 @@
 
 - (IBAction)chooseApp:(id)sender;
 - (BOOL)openFile:(NSString *)file;
+- (BOOL)openFile:(NSString *)file WithAlert:(BOOL)alertUser;
 
 @end

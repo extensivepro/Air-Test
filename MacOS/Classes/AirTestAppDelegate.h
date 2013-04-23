@@ -13,6 +13,7 @@
 @interface AirTestAppDelegate : NSObject <NSApplicationDelegate> {
     NSWindow *window;
     HTTPServer *httpServer;
+    HTTPServer *ciHTTPServer;
     DropAppView *dropView;
 }
 

@@ -112,7 +112,7 @@ static BOOL isDropOn = NO;
 #define ICON_SPACING 5.0
 
 
-- (BOOL)openFile:(NSString *)file {
+- (BOOL)openFile:(NSString *)file WithAlert:(BOOL)alertUser {
     [indicator startAnimation:self];
     
     int appCountThen = [[[AMDataHelper localHelper] allApps] count];
@@ -123,14 +123,16 @@ static BOOL isDropOn = NO;
     @catch (NSException * e) {
         DDLogError(@"Error: %@", e);
         
-        NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setMessageText:[e name]];
-        [alert setInformativeText:[e reason]];
-        [alert setAlertStyle:NSWarningAlertStyle];
+        if (alertUser) {
+            NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+            [alert addButtonWithTitle:@"OK"];
+            [alert setMessageText:[e name]];
+            [alert setInformativeText:[e reason]];
+            [alert setAlertStyle:NSWarningAlertStyle];
+            
+            [alert beginSheetModalForWindow:[self window] modalDelegate:nil didEndSelector:nil contextInfo:nil];
+        }
         
-        [alert beginSheetModalForWindow:[self window] modalDelegate:nil didEndSelector:nil contextInfo:nil];
-
         return NO;
     }
     @finally {
@@ -167,6 +169,10 @@ static BOOL isDropOn = NO;
     
     [indicator stopAnimation:self];
     return YES;
+}
+
+- (BOOL)openFile:(NSString *)file {
+    return [self openFile:file WithAlert:YES];
 }
 
 - (void)showAppIcon:(AMiOSApp *)app {
