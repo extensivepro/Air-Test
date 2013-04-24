@@ -64,6 +64,8 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		D2AB77021726518800B71F34 /* AMCIHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AB77011726518800B71F34 /* AMCIHTTPResponse.m */; };
+		D2CDE7DC17251B0400E80D23 /* AMCIHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CDE7DB17251B0400E80D23 /* AMCIHTTPConnection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -183,6 +185,10 @@
 		32FBD6B412F800BD00255254 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* AirTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AirTest-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* AirTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AB77001726518800B71F34 /* AMCIHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCIHTTPResponse.h; sourceTree = "<group>"; };
+		D2AB77011726518800B71F34 /* AMCIHTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCIHTTPResponse.m; sourceTree = "<group>"; };
+		D2CDE7DA17251B0400E80D23 /* AMCIHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCIHTTPConnection.h; sourceTree = "<group>"; };
+		D2CDE7DB17251B0400E80D23 /* AMCIHTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCIHTTPConnection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -353,6 +359,10 @@
 				3261081D12F7A86600239271 /* PNGNormalizer */,
 				32A7969512F61D1E00E7C0AB /* AMHTTPConnection.h */,
 				32A7969612F61D1E00E7C0AB /* AMHTTPConnection.m */,
+				D2CDE7DA17251B0400E80D23 /* AMCIHTTPConnection.h */,
+				D2CDE7DB17251B0400E80D23 /* AMCIHTTPConnection.m */,
+				D2AB77001726518800B71F34 /* AMCIHTTPResponse.h */,
+				D2AB77011726518800B71F34 /* AMCIHTTPResponse.m */,
 				32E4DD5312F65BE60054B867 /* AMiOSApp.h */,
 				32E4DD5412F65BE60054B867 /* AMiOSApp.m */,
 				32C62C3412F6895300D4708A /* AMDataHelper.h */,
@@ -554,6 +564,8 @@
 				32ED6AAB12FA4D2F0059DB2F /* NSBitmapImageRep-Additions.m in Sources */,
 				32ED6B8F12FA5DE50059DB2F /* AppIconControl.m in Sources */,
 				326F86FB1301888000962AD5 /* NSStringAdditions.m in Sources */,
+				D2CDE7DC17251B0400E80D23 /* AMCIHTTPConnection.m in Sources */,
+				D2AB77021726518800B71F34 /* AMCIHTTPResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
