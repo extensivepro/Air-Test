@@ -31,7 +31,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
         
         if ([args count] < 1) return NO;
         
-        NSString *cmd = [args objectAtIndex:0];
+        NSString *cmd = args[0];
         if ( [cmd isEqualToString:IPA_CMD] ) {
             return YES;
         }
@@ -58,7 +58,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
     
     if ([args count] < 1) return nil;
     
-    NSString *cmd = [args objectAtIndex:0];
+    NSString *cmd = args[0];
     
 //    NSLog(@"request header:%@",[request allHeaderFields]);
 //    NSData *postData = [request body];
@@ -72,17 +72,17 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
         NSData *postData = [request body];
         NSError *error = nil;
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:postData options:NSJSONReadingMutableContainers error:&error];
-        NSArray *files = [dict objectForKey:@"data"];
+        NSArray *files = dict[@"data"];
         results = [NSMutableDictionary dictionaryWithCapacity:[files count]];
         for (NSDictionary *file in files) {
-            if ([[file objectForKey:@"type"] isEqualToString:@"local"]) {
+            if ([file[@"type"] isEqualToString:@"local"]) {
                 AirTestAppDelegate *app = (AirTestAppDelegate *)[[NSApplication sharedApplication] delegate];
 //                NSLog(@"before height:%f",app.dropView.window.frame.size.height);
-                NSNumber *number = [NSNumber numberWithBool:[app.dropView openFile:file[@"file"] WithAlert:NO]];
+                NSNumber *number = @([app.dropView openFile:file[@"file"] WithAlert:NO]);
                 results[file[@"name"]] = number;
 //                NSLog(@"after height:%f",app.dropView.window.frame.size.height);
 //                [app.dropView display];
-            } else if ([[file objectForKey:@"type"] isEqualToString:@"upload"]) {
+            } else if ([file[@"type"] isEqualToString:@"upload"]) {
                 //todo
             } else {
                 //error
@@ -107,7 +107,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
         //some successed,some failed
         status = 207;
     }
-    NSDictionary *jsonDict = [NSDictionary dictionaryWithObject:results forKey:@"result"];
+    NSDictionary *jsonDict = @{@"result": results};
     
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict
