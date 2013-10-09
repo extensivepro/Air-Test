@@ -77,11 +77,12 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
         for (NSDictionary *file in files) {
             if ([file[@"type"] isEqualToString:@"local"]) {
                 AirTestAppDelegate *app = (AirTestAppDelegate *)[[NSApplication sharedApplication] delegate];
-//                NSLog(@"before height:%f",app.dropView.window.frame.size.height);
-                NSNumber *number = @([app.dropView openFile:file[@"file"] WithAlert:NO]);
+                BOOL __block successToOpenFile = NO;
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    successToOpenFile = [app.dropView openFile:file[@"file"] WithAlert:NO];
+                });
+                NSNumber *number = @(successToOpenFile);
                 results[file[@"name"]] = number;
-//                NSLog(@"after height:%f",app.dropView.window.frame.size.height);
-//                [app.dropView display];
             } else if ([file[@"type"] isEqualToString:@"upload"]) {
                 //todo
             } else {
@@ -119,7 +120,6 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 //    [r setHeader:@"application/json" forKey:@"Content-type"];
 //    NSLog(@"%@",[r httpHeaders]);
     return r;
-	return nil;
 }
 
 - (void)prepareForBodyWithSize:(UInt64)contentLength
