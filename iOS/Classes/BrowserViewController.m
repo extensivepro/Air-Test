@@ -67,6 +67,13 @@ Copyright (C) 2010 Apple Inc. All Rights Reserved.
 
 #define kProgressIndicatorSize 20.0
 
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+
 // A category on NSNetService that's used to sort NSNetService objects by their name.
 @interface NSNetService (BrowserViewControllerAdditions)
 - (NSComparisonResult) localizedCaseInsensitiveCompareByName:(NSNetService*)aService;
@@ -395,8 +402,11 @@ Copyright (C) 2010 Apple Inc. All Rights Reserved.
     //FFFF will make sure we see all apps in the simulator
     NSString *udid = @"FFFF3cac05dd2f8bed64c4d11c6077742bce974c128a";
 #else
-    UIDevice *device = [UIDevice currentDevice];
+//    UIDevice *device = [UIDevice currentDevice];
     NSString *udid = [OpenUDID value];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        udid = @"FFFF3cac05dd2f8bed64c4d11c6077742bce974c128a";
+    }
 
 #endif
     
